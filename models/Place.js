@@ -6,7 +6,11 @@ name: {
         type: String,
         rquired: true
 },
-description: String
+description: String,
+location: {
+        type: String,
+        rquired: true
+}
 });
 
 module.exports = moongoose.model('Place', PlaceSchema);

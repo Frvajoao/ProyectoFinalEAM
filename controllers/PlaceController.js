@@ -1,15 +1,5 @@
 let Place = require('../models/Place')
 
-const places = [
-    {
-        name: 'Plaza de Bolivar',
-        description: 'lorem ipsum'
-    },
-    {
-        name: 'Portal del Quindío'
-    }
-]
-
 let PlaceController = {
 show(req, res) {
     Place.find({})
@@ -28,7 +18,41 @@ store(req, res) {
     }).catch(err => {
     res.json(err)
     })
-    }
+    },
+find (req,res){
+    Place.findById({
+        _id: req.params.id
+
+    })
+    .then(doc =>{
+            res.json(doc)
+    }).catch(err =>{
+            res.json(err)
+    })
+},
+update(req, res){
+    Place.update({
+        _id: req.params.id
+    },{
+        name: req.body.name,
+        description: req.body.description
+    }).then(doc => {
+        res.json(doc)
+    }).catch(err =>{
+        res.json(err)
+    })
+},
+destroy(req, res){
+    Place.findByIdAndRemove({
+        _id: req.params.id    
+    })
+    .then(doc => {
+        res.json(doc)
+    }).catch(err =>{
+        res.json(err)
+    })
+}
+
 }
 
 module.exports = PlaceController;
